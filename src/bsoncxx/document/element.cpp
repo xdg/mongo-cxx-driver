@@ -264,17 +264,17 @@ types::b_array element::get_array() const {
     return types::b_array{array::view{buf, len}};
 }
 
-types::value element::get_value() const {
-    switch (static_cast<int>(type())) {
-#define BSONCXX_ENUM(type, val) \
-    case val:                   \
-        return types::value{get_##type()};
-#include <bsoncxx/enums/type.hpp>
-#undef BSONCXX_ENUM
-    }
-
-    BSONCXX_UNREACHABLE;
-}
+// types::value element::get_value() const {
+//     switch (static_cast<int>(type())) {
+// #define BSONCXX_ENUM(type, val) \
+//     case val:                   \
+//         return types::value{get_##type()};
+// #include <bsoncxx/enums/type.hpp>
+// #undef BSONCXX_ENUM
+//     }
+// 
+//     BSONCXX_UNREACHABLE;
+// }
 
 element element::operator[](stdx::string_view key) const {
     if (type() != bsoncxx::type::k_document) return element();

@@ -335,13 +335,13 @@ class BSONCXX_API element {
     ///
     types::b_maxkey get_maxkey() const;
 
-    ///
-    /// Getter for a types::value variant wrapper of the value portion of the
-    /// element.
-    ///
-    /// @return the element's value.
-    ///
-    types::value get_value() const;
+//     ///
+//     /// Getter for a types::value variant wrapper of the value portion of the
+//     /// element.
+//     ///
+//     /// @return the element's value.
+//     ///
+//     types::value get_value() const;
 
     ///
     /// If this element is a document, finds the first element of the document with the provided

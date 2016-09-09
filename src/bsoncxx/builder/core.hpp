@@ -209,10 +209,10 @@ class BSONCXX_API core {
     ///
     void append(const types::b_maxkey& value);
 
-    ///
-    /// Append a BSON variant value.
-    ///
-    void append(const types::value& value);
+//     ///
+//     /// Append a BSON variant value.
+//     ///
+//     void append(const types::value& value);
 
     ///
     /// Append a STL string as a BSON UTF-8 string.

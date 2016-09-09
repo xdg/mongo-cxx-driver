@@ -422,16 +422,16 @@ void core::concatenate(const bsoncxx::document::view& view) {
     }
 }
 
-void core::append(const bsoncxx::types::value& value) {
-    switch (static_cast<int>(value.type())) {
-#define BSONCXX_ENUM(type, val)     \
-    case val:                       \
-        append(value.get_##type()); \
-        break;
-#include <bsoncxx/enums/type.hpp>
-#undef BSONCXX_ENUM
-    }
-}
+// void core::append(const bsoncxx::types::value& value) {
+//     switch (static_cast<int>(value.type())) {
+// #define BSONCXX_ENUM(type, val)     \
+//     case val:                       \
+//         append(value.get_##type()); \
+//         break;
+// #include <bsoncxx/enums/type.hpp>
+// #undef BSONCXX_ENUM
+//     }
+// }
 
 void core::close_document() {
     if (_impl->is_array()) {

@@ -64,7 +64,7 @@ class BSONCXX_API element : private document::element {
     using document::element::get_minkey;
     using document::element::get_maxkey;
 
-    using document::element::get_value;
+//     using document::element::get_value;
 
     using document::element::operator[];
 
