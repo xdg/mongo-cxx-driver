@@ -333,7 +333,7 @@ TEST_CASE("Database integration tests", "[database]") {
 
         auto cursor = database.list_collections();
         for (auto&& coll : cursor) {
-            if (coll["name"].get_utf8().value == collection_name) {
+            if (coll["name"].get_utf8_view().value == collection_name) {
                 REQUIRE(coll["options"]["validator"].get_document().value == rule);
             }
         }

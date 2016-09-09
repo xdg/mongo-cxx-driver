@@ -45,6 +45,7 @@ class BSONCXX_API element : private document::element {
 
     using document::element::get_double;
     using document::element::get_utf8;
+    using document::element::get_utf8_view;
     using document::element::get_document;
     using document::element::get_array;
     using document::element::get_binary;

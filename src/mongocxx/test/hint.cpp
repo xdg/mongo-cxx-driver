@@ -41,7 +41,7 @@ TEST_CASE("Hint", "[hint]") {
             document::element ele{view["$hint"]};
             REQUIRE(ele);
             REQUIRE(ele.type() == type::k_utf8);
-            REQUIRE(ele.get_utf8().value.to_string() == index_name);
+            REQUIRE(ele.get_utf8_view().value.to_string() == index_name);
         }
 
         SECTION("Compares equal to matching index name") {

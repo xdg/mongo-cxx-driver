@@ -122,6 +122,52 @@ struct BSONCXX_API b_utf8 {
         : value(std::forward<T>(t)) {
     }
 
+    std::string value;
+
+    ///
+    /// Conversion operator unwrapping a string
+    ///
+    BSONCXX_INLINE operator std::string() {
+        return value;
+    }
+};
+
+// XXX Do we want combinatorial operator== for owned/non-owned?  Do we
+// want to allow implicit conversion?  Is this a reason to disallow
+// implicit conversion from non-owned to owned?
+//
+// if ( s.view() == s_v ) { ... } // won't compile -- maybe OK
+//
+// Do we even need operator== on the wrapper? For sets?
+
+///
+/// free function comparator for b_utf8
+///
+/// @relatesalso b_utf8
+///
+BSONCXX_INLINE bool operator==(const b_utf8& lhs, const b_utf8& rhs) {
+    return lhs.value == rhs.value;
+}
+
+///
+/// A BSON UTF-8 encoded string view.
+///
+struct BSONCXX_API b_utf8_view {
+    static constexpr auto type_id = type::k_utf8;
+
+    ///
+    /// Constructor for b_utf8_view.
+    ///
+    /// @param value
+    ///   The value to wrap.
+    ///
+    template <typename T,
+              typename std::enable_if<!std::is_same<b_utf8_view, typename std::decay<T>::type>::value,
+                                      int>::type = 0>
+    BSONCXX_INLINE explicit b_utf8_view(T&& t)
+        : value(std::forward<T>(t)) {
+    }
+
     stdx::string_view value;
 
     ///
@@ -133,11 +179,11 @@ struct BSONCXX_API b_utf8 {
 };
 
 ///
-/// free function comparator for b_utf8
+/// free function comparator for b_utf8_view
 ///
-/// @relatesalso b_utf8
+/// @relatesalso b_utf8_view
 ///
-BSONCXX_INLINE bool operator==(const b_utf8& lhs, const b_utf8& rhs) {
+BSONCXX_INLINE bool operator==(const b_utf8_view& lhs, const b_utf8_view& rhs) {
     return lhs.value == rhs.value;
 }
 

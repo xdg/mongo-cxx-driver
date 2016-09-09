@@ -31,6 +31,7 @@ namespace types {
 struct b_eod;
 struct b_double;
 struct b_utf8;
+struct b_utf8_view;
 struct b_document;
 struct b_array;
 struct b_binary;
@@ -167,11 +168,20 @@ class BSONCXX_API element {
     ///
     /// Getter for elements of the b_utf8 type.
     ///
-    /// @throws bsoncxx::exception if this element is not a b_utf8.
+    /// @throws bsoncxx::exception if this element is not a k_utf8.
     ///
     /// @return the element's value.
     ///
     types::b_utf8 get_utf8() const;
+
+    ///
+    /// Getter for elements of the b_utf8_view type.
+    ///
+    /// @throws bsoncxx::exception if this element is not a k_utf8.
+    ///
+    /// @return the element's value.
+    ///
+    types::b_utf8_view get_utf8_view() const;
 
     ///
     /// Getter for elements of the b_document type.

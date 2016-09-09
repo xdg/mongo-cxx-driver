@@ -59,12 +59,12 @@ TEST_CASE("validation_criteria", "[validation_criteria]") {
         ele = criteria_view["validationLevel"];
         REQUIRE(ele);
         REQUIRE(ele.type() == type::k_utf8);
-        REQUIRE(ele.get_utf8().value.to_string() == "strict");
+        REQUIRE(ele.get_utf8_view().value.to_string() == "strict");
 
         ele = criteria_view["validationAction"];
         REQUIRE(ele);
         REQUIRE(ele.type() == type::k_utf8);
-        REQUIRE(ele.get_utf8().value.to_string() == "warn");
+        REQUIRE(ele.get_utf8_view().value.to_string() == "warn");
 
         ele = criteria_view["validator"];
         REQUIRE(ele);

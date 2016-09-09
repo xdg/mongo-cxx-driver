@@ -138,7 +138,7 @@ TEST_CASE("Collection", "[collection]") {
             bsoncxx::document::view o(bson_get_data(options), options->len);
 
             mongocxx::stdx::string_view bar(
-                p[0].get_document().value["$match"].get_document().value["foo"].get_utf8());
+                p[0].get_document().value["$match"].get_document().value["foo"].get_utf8_view());
             std::int32_t one(
                 p[1].get_document().value["$sort"].get_document().value["foo"].get_int32());
 
@@ -403,11 +403,11 @@ TEST_CASE("Collection", "[collection]") {
                 REQUIRE(query_view["$orderby"].get_document() == *expected_sort);
             }
             if (expected_hint) {
-                REQUIRE(query_view["$hint"].get_utf8() ==
-                        expected_hint->operator[]("$hint").get_utf8());
+                REQUIRE(query_view["$hint"].get_utf8_view() ==
+                        expected_hint->operator[]("$hint").get_utf8_view());
             }
             if (expected_comment) {
-                REQUIRE(query_view["$comment"].get_utf8().value == *expected_comment);
+                REQUIRE(query_view["$comment"].get_utf8_view().value == *expected_comment);
             }
             if (expected_cursor_type) {
                 REQUIRE(flags == expected_flags);

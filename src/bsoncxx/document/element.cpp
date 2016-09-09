@@ -116,7 +116,18 @@ types::b_utf8 element::get_utf8() const {
     uint32_t len;
     const char* val = bson_iter_utf8(&iter, &len);
 
-    return types::b_utf8{stdx::string_view{val, len}};
+    return types::b_utf8{std::string{val, len}};
+}
+
+types::b_utf8_view element::get_utf8_view() const {
+    BSONCXX_TYPE_CHECK(k_utf8);
+
+    CITER;
+
+    uint32_t len;
+    const char* val = bson_iter_utf8(&iter, &len);
+
+    return types::b_utf8_view{stdx::string_view{val, len}};
 }
 
 types::b_double element::get_double() const {

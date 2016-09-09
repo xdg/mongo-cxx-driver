@@ -638,7 +638,7 @@ TEST_CASE("CRUD functionality", "[driver::collection]") {
 
         std::vector<stdx::string_view> distinct_values;
         for (auto&& value : values_array) {
-            distinct_values.push_back(value.get_utf8().value);
+            distinct_values.push_back(value.get_utf8_view().value);
         }
 
         const auto assert_contains_one = [&](stdx::string_view val) {
@@ -693,12 +693,12 @@ TEST_CASE("create_index returns index name", "[collection]") {
     options.name(indexName);
 
     auto response = coll.create_index(index.view(), options);
-    REQUIRE(response.view()["name"].get_utf8().value == stdx::string_view{indexName});
+    REQUIRE(response.view()["name"].get_utf8_view().value == stdx::string_view{indexName});
 
     bsoncxx::document::value index2 = bsoncxx::builder::stream::document{}
                                       << "b" << 1 << "c" << -1
                                       << bsoncxx::builder::stream::finalize;
 
     auto response2 = coll.create_index(index2.view(), options::index{});
-    REQUIRE(response2.view()["name"].get_utf8().value == stdx::string_view{"b_1_c_-1"});
+    REQUIRE(response2.view()["name"].get_utf8_view().value == stdx::string_view{"b_1_c_-1"});
 }

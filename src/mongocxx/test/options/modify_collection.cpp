@@ -68,7 +68,7 @@ TEST_CASE("modify_collection", "[modify_collection]") {
         document::element validationLevel{doc_view["validationLevel"]};
         REQUIRE(validationLevel);
         REQUIRE(validationLevel.type() == type::k_utf8);
-        REQUIRE(validationLevel.get_utf8().value.to_string() == "strict");
+        REQUIRE(validationLevel.get_utf8_view().value.to_string() == "strict");
 
         document::element validationAction{doc_view["validationAction"]};
         REQUIRE(!validationAction);
