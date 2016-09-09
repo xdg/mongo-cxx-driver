@@ -346,8 +346,10 @@ stdx::optional<result::insert_one> collection::insert_one(view_or_value document
         return stdx::optional<result::insert_one>();
     }
 
+//     return stdx::optional<result::insert_one>(
+//         result::insert_one(std::move(result.value()), std::move(oid.get_value())));
     return stdx::optional<result::insert_one>(
-        result::insert_one(std::move(result.value()), std::move(oid.get_value())));
+        result::insert_one(std::move(result.value())));
 }
 
 stdx::optional<result::replace_one> collection::replace_one(view_or_value filter,
