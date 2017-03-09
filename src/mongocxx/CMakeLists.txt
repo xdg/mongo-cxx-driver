@@ -113,16 +113,8 @@ add_library(mongocxx_static STATIC
 target_compile_definitions(mongocxx_static PUBLIC MONGOCXX_STATIC)
 
 set_target_properties(mongocxx_static PROPERTIES
-    OUTPUT_NAME mongocxx
+    OUTPUT_NAME mongocxx-static
 )
-
-# Follow the boost convention to disambiguate the dll and static
-# library names
-if (WIN32)
-    set_target_properties(mongocxx_static PROPERTIES
-        PREFIX lib
-    )
-endif()
 
 add_library(mongocxx_mocked STATIC
     ${mongocxx_sources}
@@ -205,14 +197,30 @@ configure_package_config_file(
   PATH_VARS PACKAGE_INCLUDE_INSTALL_DIRS PACKAGE_LIBRARY_INSTALL_DIRS
 )
 
+configure_package_config_file(
+  cmake/libmongocxx-static-config.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/libmongocxx-static-config.cmake
+  INSTALL_DESTINATION lib/cmake/libmongocxx-static-${MONGOCXX_VERSION}
+  PATH_VARS PACKAGE_INCLUDE_INSTALL_DIRS PACKAGE_LIBRARY_INSTALL_DIRS
+)
+
 write_basic_package_version_file(
   ${CMAKE_CURRENT_BINARY_DIR}/libmongocxx-config-version.cmake
   VERSION ${MONGOCXX_VERSION}
   COMPATIBILITY SameMajorVersion
 )
 
+write_basic_package_version_file(
+  ${CMAKE_CURRENT_BINARY_DIR}/libmongocxx-static-config-version.cmake
+  VERSION ${MONGOCXX_VERSION}
+  COMPATIBILITY SameMajorVersion
+)
+
 install(
-  FILES ${CMAKE_CURRENT_BINARY_DIR}/libmongocxx-config.cmake ${CMAKE_CURRENT_BINARY_DIR}/libmongocxx-config-version.cmake
+  FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/libmongocxx-config.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/libmongocxx-config-version.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/libmongocxx-static-config.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/libmongocxx-static-config-version.cmake
   DESTINATION lib/cmake/libmongocxx-${MONGOCXX_VERSION}
 )
 

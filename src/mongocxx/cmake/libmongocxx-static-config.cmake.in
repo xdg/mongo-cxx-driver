@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-prefix=@CMAKE_INSTALL_PREFIX@
-includedir=${prefix}/include
-libdir=${prefix}/lib
+set(LIBMONGOCXX_VERSION_MAJOR @MONGOCXX_VERSION_MAJOR@)
+set(LIBMONGOCXX_VERSION_MINOR @MONGOCXX_VERSION_MINOR@)
+set(LIBMONGOCXX_VERSION_PATCH @MONGOCXX_VERSION_PATCH@)
+set(LIBMONGOCXX_PACKAGE_VERSION @MONGOCXX_VERSION@)
+set(LIBMONGOCXX_LIBRARIES mongocxx-static)
 
-Name: libbsoncxx
-Description: The MongoDB C++11 BSON Library (shared)
-URL: http://github.com/mongodb/mongo-cxx-driver
-Version: @BSONCXX_VERSION@
-Requires.private: libbson-@LIBBSON_REQUIRED_ABI_VERSION@ >= @LIBBSON_REQUIRED_VERSION@
-Cflags: -I${includedir}/bsoncxx/@BSONCXX_INLINE_NAMESPACE@
-Libs: -L${libdir} -lbsoncxx
+@PACKAGE_INIT@
+
+set_and_check(LIBMONGOCXX_INCLUDE_DIRS "${PACKAGE_PREFIX_DIR}/@PACKAGE_INCLUDE_INSTALL_DIRS@")
+set_and_check(LIBMONGOCXX_LIBRARY_DIRS "${PACKAGE_PREFIX_DIR}/@PACKAGE_LIBRARY_INSTALL_DIRS@")
+

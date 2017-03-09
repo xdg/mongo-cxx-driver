@@ -17,7 +17,7 @@ includedir=${prefix}/include
 libdir=${prefix}/lib
 
 Name: libmongocxx
-Description: The MongoDB C++11 Driver Library
+Description: The MongoDB C++11 Driver Library (shared)
 URL: http://github.com/mongodb/mongo-cxx-driver
 Version: @MONGOCXX_VERSION@
 Requires.private: libbson-@LIBBSON_REQUIRED_ABI_VERSION@ >= @LIBBSON_REQUIRED_VERSION@, libmongoc-@LIBMONGOC_REQUIRED_ABI_VERSION@

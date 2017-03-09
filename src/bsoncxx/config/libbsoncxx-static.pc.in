@@ -16,10 +16,10 @@ prefix=@CMAKE_INSTALL_PREFIX@
 includedir=${prefix}/include
 libdir=${prefix}/lib
 
-Name: libbsoncxx
-Description: The MongoDB C++11 BSON Library (shared)
+Name: libbsoncxx-static
+Description: The MongoDB C++11 BSON Library (static)
 URL: http://github.com/mongodb/mongo-cxx-driver
 Version: @BSONCXX_VERSION@
 Requires.private: libbson-@LIBBSON_REQUIRED_ABI_VERSION@ >= @LIBBSON_REQUIRED_VERSION@
 Cflags: -I${includedir}/bsoncxx/@BSONCXX_INLINE_NAMESPACE@
-Libs: -L${libdir} -lbsoncxx
+Libs: -L${libdir} -lbsoncxx-static

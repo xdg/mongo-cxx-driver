@@ -107,16 +107,8 @@ add_library(bsoncxx_static STATIC
 target_compile_definitions(bsoncxx_static PUBLIC BSONCXX_STATIC)
 
 set_target_properties(bsoncxx_static PROPERTIES
-    OUTPUT_NAME bsoncxx
+    OUTPUT_NAME bsoncxx-static
 )
-
-# Follow the boost convention to disambiguate the dll and static
-# library names
-if (WIN32)
-    set_target_properties(bsoncxx_static PROPERTIES
-        PREFIX lib
-    )
-endif()
 
 add_library(bsoncxx SHARED
     ${bsoncxx_sources}
@@ -194,14 +186,30 @@ configure_package_config_file(
   PATH_VARS PACKAGE_INCLUDE_INSTALL_DIRS PACKAGE_LIBRARY_INSTALL_DIRS
 )
 
+configure_package_config_file(
+  cmake/libbsoncxx-static-config.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/libbsoncxx-static-config.cmake
+  INSTALL_DESTINATION lib/cmake/libbsoncxx-${BSONCXX_VERSION}
+  PATH_VARS PACKAGE_INCLUDE_INSTALL_DIRS PACKAGE_LIBRARY_INSTALL_DIRS
+)
+
 write_basic_package_version_file(
   ${CMAKE_CURRENT_BINARY_DIR}/libbsoncxx-config-version.cmake
   VERSION ${BSONCXX_VERSION}
   COMPATIBILITY SameMajorVersion
 )
 
+write_basic_package_version_file(
+  ${CMAKE_CURRENT_BINARY_DIR}/libbsoncxx-static-config-version.cmake
+  VERSION ${BSONCXX_VERSION}
+  COMPATIBILITY SameMajorVersion
+)
+
 install(
-  FILES ${CMAKE_CURRENT_BINARY_DIR}/libbsoncxx-config.cmake ${CMAKE_CURRENT_BINARY_DIR}/libbsoncxx-config-version.cmake
+  FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/libbsoncxx-config.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/libbsoncxx-config-version.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/libbsoncxx-static-config.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/libbsoncxx-static-config-version.cmake
   DESTINATION lib/cmake/libbsoncxx-${BSONCXX_VERSION}
 )
 

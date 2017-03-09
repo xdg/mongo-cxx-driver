@@ -40,8 +40,15 @@ configure_file(
     @ONLY
 )
 
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/libbsoncxx-static.pc.in
+    ${CMAKE_CURRENT_BINARY_DIR}/libbsoncxx-static.pc
+    @ONLY
+)
+
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/libbsoncxx.pc"
+    "${CMAKE_CURRENT_BINARY_DIR}/libbsoncxx-static.pc"
     DESTINATION lib/pkgconfig
     COMPONENT dev
 )
